@@ -4,17 +4,17 @@
 		//Propriétés (variables)
 		private $nom;
 		
-		private $prenom
+		private $prenom;
 		
-		private $age
+		private $age;
 		
-		private $adresse
+		private $adresse;
 		
-		private $email
+		private $email;
 		
-		private $login
+		private $login;
 		
-		private $pass_md5
+		private $pass_md5;
 		
 		//Constructeur
 		public __construct($login)
