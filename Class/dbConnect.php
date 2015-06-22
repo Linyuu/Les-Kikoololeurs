@@ -1,5 +1,5 @@
 <?php
-	public class dbConnect
+	class dbConnect
 	{
 		/*
 		 * Connexion PDO.
@@ -25,19 +25,25 @@
 		 * Chemin de la base de données.
 		 */
 		private $_path = "127.0.0.1";
+
+
+        /*
+         * Nom de la base de données
+         */
+        private $_database = 'test';
 		
 		/*
 		 * Constructeur
 		 */
-		public __construct()
+		function __construct()
 		{
-			$this->_connect = new PDO($this->_type . ":" . $this->_path,$this->_user, this->_pass);
+			$this->_connect = new PDO($this->_type . ":host=" . $this->_path . ";dbname=" . $this->_database, $this->_user, $this->_pass);
 		}
 		
 		/* 
 		 * Get my articles from database 'articles'.
 		 */
-		public GetMyArticles(){
+		function GetMyArticles(){
 			$this->_connect->query("Select * FROM `articles`");
 			
 			return $this->_connect->fetchAll();
@@ -46,9 +52,19 @@
 		/*
 		 * Get my users from database 'users'.
 		 */
-		public GetMyUsers(){
+		function GetMyUsers(){
 			$this->_connect->query("Select * FROM `users`");
 			
 			return $this->_connect->fetchAll();
 		}
+
+        function CreateDbNews($title, $author, $content){
+            //insertion
+            $result = $this->_connect->query('Insert...');
+
+
+            return true;
+
+
+        }
 	}
