@@ -47,13 +47,13 @@
 		 * Get my users from database 'users'.
 		 */
 		public GetMyUsers(){
-			$this->_connect->query("Select * FROM `users`");
+			$this->_connect->query("Select * FROM `membre`");
 			
 			return $this->_connect->fetchAll();
 		}
 		
 		public GetOneUser($login){
-			$this->_connect->query("SELECT * FROM `users` WHERE login='" . $login . "';");
+			$this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "';");
 			
 			return $this->_connect->fetch();
 		}
