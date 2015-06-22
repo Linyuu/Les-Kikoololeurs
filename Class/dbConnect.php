@@ -58,6 +58,15 @@
         }
 
 
+        /*
+         *  Get article from DataBase 'news'
+         */
+
+        function getDbNews(){
+            $result = $this->_connect->query('SELECT * FROM news');
+            return $result->fetchAll();
+        }
+
 
 		/*
 		 * Get my articles from database 'articles'.

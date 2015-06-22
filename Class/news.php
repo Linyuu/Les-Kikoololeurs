@@ -45,6 +45,14 @@ include "dbConnect.php";
 
             return $this->_dbCo->createDbNews($title, $author, $content);
         }
+
+        function getNews($title, $author, $content){
+            $this->_title = addslashes(htmlentities($title));
+            $this->_author = addslashes(htmlentities($author));
+            $this->_content = addslashes(htmlentities($content));
+
+            return $this->_dbCo->getDbNews($title, $author, $content);
+        }
     }
 
 ?>
