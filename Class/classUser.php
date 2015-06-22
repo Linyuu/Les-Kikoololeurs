@@ -17,10 +17,17 @@
 		private $pass_md5
 		
 		//Constructeur
-		public __construct()
+		public __construct($login)
 		{
 			$connexion = new dbConnect;
-			
+			$infos = $connexion->GetOneUser($login);
+			$this->nom = $infos['nom'];
+			$this->prenom = $infos['prenom'];
+			$this->age = $infos['age'];
+			$this->adresse = $infos['adresse'];
+			$this->email = $infos['email'];
+			$this->login = $infos['login'];
+			$this->pass_md5 = $infos['pass_md5'];
 		}
 		
 		//Setters/Getters
@@ -93,5 +100,7 @@
 		{
 			return $this->pass_md5;
 		}
+		
+		
 	}
 ?>
