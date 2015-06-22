@@ -1,4 +1,6 @@
 <?php
+include "dbconnect.php";
+
     class news{
 
         /*
@@ -15,6 +17,14 @@
          * contenu de la news
          */
         private $_content;
+
+
+        /*
+         *
+         */
+        function createNews($titel, $autheur, $content){
+
+        }
 
     }
 ?>
