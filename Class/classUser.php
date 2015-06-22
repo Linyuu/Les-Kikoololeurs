@@ -12,6 +12,17 @@
 		
 		private $email
 		
+		private $login
+		
+		private $pass_md5
+		
+		//Constructeur
+		public __construct()
+		{
+			$connexion = new dbConnect;
+			
+		}
+		
 		//Setters/Getters
 		public setnom($nom)
 		{
@@ -73,14 +84,14 @@
 			return $this->login;
 		}
 		
-		public setpassword($password)
+		public setpass_md5($pass_md5)
 		{
-			$this->prenom = $password;
+			$this->pass_md5 = $pass_md5;
 		}
 		
-		public getpassword()
+		public getpass_md5()
 		{
-			return $this->password;
+			return $this->pass_md5;
 		}
 	}
 ?>
