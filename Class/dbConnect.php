@@ -52,6 +52,7 @@
 		/*
 		 * Get my users from database 'users'.
 		 */
+<<<<<<< HEAD
 		function GetMyUsers(){
 			$this->_connect->query("Select * FROM `users`");
 			
@@ -67,4 +68,17 @@
 
 
         }
+=======
+		public GetMyUsers(){
+			$this->_connect->query("Select * FROM `membre`");
+			
+			return $this->_connect->fetchAll();
+		}
+		
+		public GetOneUser($login){
+			$this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "';");
+			
+			return $this->_connect->fetch();
+		}
+>>>>>>> origin/master
 	}
