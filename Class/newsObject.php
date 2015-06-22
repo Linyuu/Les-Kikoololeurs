@@ -46,12 +46,29 @@ include "dbConnect.php";
             return $this->_dbCo->createDbNews($title, $author, $content);
         }
 
+        /*
+         * Fonction de récupération des news
+         */
         function getNews($title, $author, $content){
+            //sécurisation des variables
             $this->_title = addslashes(htmlentities($title));
             $this->_author = addslashes(htmlentities($author));
             $this->_content = addslashes(htmlentities($content));
 
-            return $this->_dbCo->getDbNews($title, $author, $content);
+            return $this->_dbCo->getDbNews();
+        }
+
+
+        /*
+         * Fonction de modification de news
+         */
+        function modifyNews($title, $author, $content){
+            //sécurisation des variables
+            $this->_title = addslashes(htmlentities($title));
+            $this->_author = addslashes(htmlentities($author));
+            $this->_content = addslashes(htmlentities($content));
+
+            return $this->_dbCo->modifyDbNews();
         }
     }
 

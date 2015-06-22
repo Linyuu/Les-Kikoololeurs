@@ -3,19 +3,19 @@
 <head>
     <title>Bootstrap</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="css/carousel.css" />
-    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/carousel.css" />
+    <link rel="icon" type="image/png" href="../images/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
 <!-- Initialisation de jquery -->
-<script src="js/jquery.min.js"></script>
+<script src="../js/jquery.min.js"></script>
 
 <!-- Initialisation du java de bootstrap -->
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 <!-- Menu de navigation -->
 <nav class="navbar navbar-inverse">
@@ -28,13 +28,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="images/logo_iphtest.png" alt="logo de iphtest" /></a>
+            <a class="navbar-brand" href="#"><img src="../images/logo_iphtest.png" alt="logo de iphtest" /></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="../index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
                 <li><a href="inscription.php"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
                 <li><a href="connexion.php"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
             </ul>
@@ -65,7 +65,7 @@
             <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
             <div class="container">
                 <div class="carousel-caption">
-                    <img src="images/logo_iphtest.png" id="carousel-images" alt="logo de iphtest" /><br />
+                    <img src="../images/logo_iphtest.png" id="carousel-images" alt="logo de iphtest" /><br />
                     <h1>Bienvenue sur IPHTEST !!!</h1>
                     <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !<br>
                         Alors n'attendez plus et inscrivez-vous !!!</p>
@@ -77,7 +77,7 @@
             <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
             <div class="container">
                 <div class="carousel-caption">
-                    <img src="images/member.png" id="carousel-images" alt="logo de membre" /><br />
+                    <img src="../images/member.png" id="carousel-images" alt="logo de membre" /><br />
                     <h1>Venez découvrir notre espace membre</h1>
                     <p>Et si vous ajoutiez votre propre photo de profil !<br>
                         Pour découvrir cette option, connectez-vous ou inscrivez-vous !</p>
@@ -102,7 +102,7 @@
         <?php
         //index
         if (isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['content'])){
-            include "Class/news.php";
+            include "Class/newsObject.php";
             $news = new news();
             if ($news->createNews($_POST['title'], $_POST['author'],$_POST['content']) == true){
                 echo '<div class="alert alert-success" role="alert">La news à bien été crée !!!</div>';
@@ -140,12 +140,12 @@
         </div>
         <div class="col-md-4">
             <h2>Suivez-nous !</h2>
-            <img src="images/facebook_logo.png" id="images_social_footer" title="Nous suivre sur Facebook !" alt="logo de facebook" /><img src="images/twitter_logo.png" id="images_social_footer" title="Nous suivre sur Twitter !" alt="logo de twitter" /><img src="images/google+_logo.png" id="images_social_footer" title="Nous suivre sur Google + !" alt="logo de google +" /><img src="images/rss_logo.png" id="images_social_footer" title="Nous suivre avec Flux RSS !" alt="logo de flux rss" />
+            <img src="../images/facebook_logo.png" id="images_social_footer" title="Nous suivre sur Facebook !" alt="logo de facebook" /><img src="../images/twitter_logo.png" id="images_social_footer" title="Nous suivre sur Twitter !" alt="logo de twitter" /><img src="../images/google+_logo.png" id="images_social_footer" title="Nous suivre sur Google + !" alt="logo de google +" /><img src="../images/rss_logo.png" id="images_social_footer" title="Nous suivre avec Flux RSS !" alt="logo de flux rss" />
         </div>
     </div>
     <hr></hr>
     <footer>
-        <p><span class="glyphicon glyphicon-copyright-mark"></span> Copyright IPHTEST 2015 <img src="images/logo_iphtest.png" id="footer_logo" alt="logo de iphtest" /></p>
+        <p><span class="glyphicon glyphicon-copyright-mark"></span> Copyright IPHTEST 2015 <img src="../images/logo_iphtest.png" id="footer_logo" alt="logo de iphtest" /></p>
     </footer>
 </div>
 

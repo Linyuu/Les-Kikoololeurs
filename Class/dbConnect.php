@@ -30,7 +30,7 @@
         /*
          * Nom de la base de données
          */
-        private $_database = 'test';
+        private $_database = 'news_system';
 		
 		/*
 		 * Constructeur
@@ -65,6 +65,30 @@
         function getDbNews(){
             $result = $this->_connect->query('SELECT * FROM news');
             return $result->fetchAll();
+        }
+
+
+
+
+        /*
+         * get news by id from database 'news'
+         */
+
+        function getDbNewsId($id){
+            $result = $this->_connect->query('SELECT * FROM news WHERE id='.$id.'');
+            return true;
+
+        }
+
+
+
+
+        /*
+         * Modify articles from database 'news'
+         */
+
+        function modifyDbNews(){
+            //modification de l'article
         }
 
 
