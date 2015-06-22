@@ -27,7 +27,7 @@ include "dbConnect.php";
             try{
                 $this->_dbCo = new dbConnect();
             }catch(\Exception $e){
-
+                echo 'Erreur: ' . $e . '';
             }
         }
 
@@ -37,9 +37,10 @@ include "dbConnect.php";
         function createNews($title, $author, $content){
             //securisation des variables
 
-            $title = addslashes(htmlentities($this->_title));
-            $author = addslashes(htmlentities($this->_author));
-            $content = addslashes(htmlentities($this->_content));
+            $this->_author = addslashes(htmlentities($author));
+            $this->_title = addslashes(htmlentities($title));
+            $this->_content = addslashes(htmlentities($content));
+
 
 
             return $this->_dbCo->createDbNews($title, $author, $content);

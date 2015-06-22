@@ -40,7 +40,26 @@
 			$this->_connect = new PDO($this->_type . ":host=" . $this->_path . ";dbname=" . $this->_database, $this->_user, $this->_pass);
 		}
 		
-		/* 
+
+		/*
+		 * Create article into database 'news'
+		 */
+
+        function CreateDbNews($title, $author, $content){
+            //insertion de l'article dans la base de données
+            $result = $this->_connect->prepare('INSERT INTO news (title, author, content) VALUES(:title, :author, :content)');
+            $result->execute(array(
+                "title" => $title,
+                "author" => $author,
+                "content" => $content
+            ));
+
+            return true;
+        }
+
+
+
+		/*
 		 * Get my articles from database 'articles'.
 		 */
 		function GetMyArticles(){
@@ -48,37 +67,22 @@
 			
 			return $this->_connect->fetchAll();
 		}
-		
+
 		/*
 		 * Get my users from database 'users'.
 		 */
-<<<<<<< HEAD
+
 		function GetMyUsers(){
 			$this->_connect->query("Select * FROM `users`");
 			
 			return $this->_connect->fetchAll();
 		}
 
-        function CreateDbNews($title, $author, $content){
-            //insertion
-            $result = $this->_connect->query('Insert...');
 
-
-            return true;
-
-
-        }
-=======
-		public GetMyUsers(){
-			$this->_connect->query("Select * FROM `membre`");
-			
-			return $this->_connect->fetchAll();
-		}
 		
-		public GetOneUser($login){
+		function GetOneUser($login){
 			$this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "';");
 			
 			return $this->_connect->fetch();
 		}
->>>>>>> origin/master
 	}
