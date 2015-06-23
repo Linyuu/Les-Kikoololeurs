@@ -35,7 +35,7 @@
                 <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
                 <li><a href="inscription.php"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
                 <li><a href="connexion.php"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
-                <li><a href="index.php"><span class="glyphicon glyphicon-magnet"></span> Contact</a></li>
+                <li><a href="index.php?action=contact"><span class="glyphicon glyphicon-magnet"></span> Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Link</a></li>
@@ -168,25 +168,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
         $erreur = 'Au moins un des champs est vide.';
     }
 }
-if ($contact == 1){
-    $to = "sebastien.bayle124@gmail.com";
-    $from = $_REQUEST['email'];
-    $name = $_REQUEST['name'];
-    $headers = "De: $from";
-    $subject = "Un message de votre site : Formulaire contact";
-
-    $fields = array();
-    $fields{"name"} = "name";
-    $fields{"email"} = "email";
-    $fields{"phone"} = "phone";
-    $fields{"message"} = "message";
-
-    $body = "Here is what was sent:\n\n"; foreach($fields as $a => $b){   $body .= sprintf("%20s: %s\n",$b,$_REQUEST[$a]); }
-
-    $send = mail($to, $subject, $body, $headers);
-
+if ($GET == contact){
     ?>
-
     <form id="contact" name="contact" method="post">
         <fieldset>
             <label for="name" id="name">Name<span class="required">*</span></label>
@@ -219,8 +202,24 @@ if ($contact == 1){
     Quelque chose s'est mal passé, le message n'a pas été envoyé
   </span>
     </div>
-
 <?php
+    if (isset($POST)){
+        $to = "sebastien.bayle124@gmail.com";
+        $from = $_REQUEST['email'];
+        $name = $_REQUEST['name'];
+        $headers = "De: $from";
+        $subject = "Un message de votre site : Formulaire contact";
+
+        $fields = array();
+        $fields{"name"} = "name";
+        $fields{"email"} = "email";
+        $fields{"phone"} = "phone";
+        $fields{"message"} = "message";
+
+        $body = "Here is what was sent:\n\n"; foreach($fields as $a => $b){   $body .= sprintf("%20s: %s\n",$b,$_REQUEST[$a]); }
+
+        $send = mail($to, $subject, $body, $headers);
+    }
 }
 if (isset($erreur)) echo '<br /><br />',$erreur;
 ?>
