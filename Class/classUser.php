@@ -101,6 +101,8 @@
 			return $this->pass_md5;
 		}
 		
+		//Creation d'un utilisateur
+		
 		public createUser($nom, $prenom, $age, $adresse, $email, $login, $pass_md5)
 		{
 			$connexion = new dbConnect;
@@ -116,6 +118,16 @@
             ));
 			
 			return $result;
+		}
+		
+		//Suppression d'un utilisateur
+		
+		public deleteUser($login)
+		{
+			$connexion = new dbConnect;
+			$result = $this->_connect->prepare('DELETE FROM membre WHERE login="' . $login . '";');
+			$result->execute();
+			
 		}
 	}
 ?>
