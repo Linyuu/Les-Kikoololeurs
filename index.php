@@ -233,7 +233,7 @@ case 'home':
 
             $send = mail($to, $subject, $body, $headers);
         }
-    case 'inscription':
+    case 'login':
     }
 ?>
 </body>
