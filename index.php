@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html>
 <head>
-    <title>Bootstrap</title>
+    <title><?php echo $_POST['actionPage']; ?></title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
@@ -108,7 +108,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     }
 }
 
-switch ($_GET['actionPage']){
+switch ($_GET['action']){
 case 'home':
 ?>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -177,6 +177,7 @@ case 'home':
         <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
     </div>
     <?php
+    break;
     case 'contact':
         ?>
         <form id="contact" name="contact" method="post">
@@ -233,6 +234,7 @@ case 'home':
 
             $send = mail($to, $subject, $body, $headers);
         }
+    break;
     case 'login':
     }
 ?>
