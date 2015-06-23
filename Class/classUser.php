@@ -147,5 +147,14 @@
 			$membre = $connexion->GetOneUser();
 			return $membre;
 		}
+		
+		//Modification d'un utilisateur
+		public modifUser($attribut, $newvaleur, $login)
+		{
+			$connexion = new dbConnect;
+			$connexion->prepare('UPDATE membre SET ' . $attribut . ' = "' . $newvaleur . '" WHERE login="' . $login . '";');
+			$result = $connexion->execute();
+			return $result;
+		}
 	}
 ?>
