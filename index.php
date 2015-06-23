@@ -201,17 +201,6 @@ case 'home':
                 <input id="submit" type="submit" name="submit" value="Send"/>
             </fieldset>
         </form>
-
-        <div id="success">
-  <span>
-    Votre message a été correctement envoyé
-  </span>
-        </div>
-
-        <div id="error">
-  <span>
-    Quelque chose s'est mal passé, le message n'a pas été envoyé
-  </span>
         </div>
         <?php
         if (isset($POST)) {
