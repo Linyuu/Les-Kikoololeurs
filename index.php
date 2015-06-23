@@ -109,8 +109,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
 }
 
 switch ($_GET['actionPage']){
-            case 'home':
-        ?>
+case 'home':
+?>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -119,25 +119,38 @@ switch ($_GET['actionPage']){
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+            <img class="first-slide"
+                 src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                 alt="First slide">
+
             <div class="container">
                 <div class="carousel-caption">
-                    <img src="images/logo_iphtest.png" id="carousel-images" alt="logo de iphtest" /><br />
+                    <img src="images/logo_iphtest.png" id="carousel-images" alt="logo de iphtest"/><br/>
+
                     <h1>Bienvenue sur IPHTEST !!!</h1>
-                    <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !<br>
+
+                    <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre
+                        profil !<br>
                         Alors n'attendez plus et inscrivez-vous !!!</p>
+
                     <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
                 </div>
             </div>
         </div>
         <div class="item">
-            <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+            <img class="second-slide"
+                 src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                 alt="Second slide">
+
             <div class="container">
                 <div class="carousel-caption">
-                    <img src="images/member.png" id="carousel-images" alt="logo de membre" /><br />
+                    <img src="images/member.png" id="carousel-images" alt="logo de membre"/><br/>
+
                     <h1>Venez découvrir notre espace membre</h1>
+
                     <p>Et si vous ajoutiez votre propre photo de profil !<br>
                         Pour découvrir cette option, connectez-vous ou inscrivez-vous !</p>
+
                     <p><a class="btn btn-lg btn-primary" href="connexion.php" role="button">Me Connecter</a>
                         <a class="btn btn-lg btn-primary" href="inscription.php" role="button">M'Inscrire</a></p>
                 </div>
@@ -156,65 +169,72 @@ switch ($_GET['actionPage']){
 <div class="jumbotron">
     <div class="container">
         <h1>Bienvenue sur IPHTEST !!!</h1>
+
         <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !</p>
+
         <p>Alors n'attendez plus et inscrivez-vous !!!</p>
+
         <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
     </div>
     <?php
     case 'contact':
-    ?>
-    <form id="contact" name="contact" method="post">
-        <fieldset>
-            <label for="name" id="name">Name<span class="required">*</span></label>
-            <input type="text" name="name" id="name" size="30" value="" required/>
+        ?>
+        <form id="contact" name="contact" method="post">
+            <fieldset>
+                <label for="name" id="name">Name<span class="required">*</span></label>
+                <input type="text" name="name" id="name" size="30" value="" required/>
 
-            <label for="email" id="email">Email<span class="required">*</span></label>
-            <input type="text" name="email" id="email" size="30" value="" required/>
+                <label for="email" id="email">Email<span class="required">*</span></label>
+                <input type="text" name="email" id="email" size="30" value="" required/>
 
-            <label for="phone" id="phone">Phone</label>
-            <input type="text" name="phone" id="phone" size="30" value="" />
+                <label for="phone" id="phone">Phone</label>
+                <input type="text" name="phone" id="phone" size="30" value=""/>
 
-            <label for="Message" id="message">Message<span class="required">*</span></label>
-            <textarea name="message" id="message" required></textarea>
+                <label for="Message" id="message">Message<span class="required">*</span></label>
+                <textarea name="message" id="message" required></textarea>
 
-            <label for="Captcha" id="captcha">Name the small house pet that says "<i>meow</i>"<span class="required">*</span></label>
-            <input type="text" name="captcha" value="" required/>
+                <label for="Captcha" id="captcha">Name the small house pet that says "<i>meow</i>"<span
+                        class="required">*</span></label>
+                <input type="text" name="captcha" value="" required/>
 
-            <input id="submit" type="submit" name="submit" value="Send" />
-        </fieldset>
-    </form>
+                <input id="submit" type="submit" name="submit" value="Send"/>
+            </fieldset>
+        </form>
 
-    <div id="success">
+        <div id="success">
   <span>
     Votre message a été correctement envoyé
   </span>
-    </div>
+        </div>
 
-    <div id="error">
+        <div id="error">
   <span>
     Quelque chose s'est mal passé, le message n'a pas été envoyé
   </span>
-    </div>
-<?php
-    if (isset($POST)){
-        $to = "sebastien.bayle124@gmail.com";
-        $from = $_REQUEST['email'];
-        $name = $_REQUEST['name'];
-        $headers = "De: $from";
-        $subject = "Un message de votre site : Formulaire contact";
+        </div>
+        <?php
+        if (isset($POST)) {
+            $to = "sebastien.bayle124@gmail.com";
+            $from = $_REQUEST['email'];
+            $name = $_REQUEST['name'];
+            $headers = "De: $from";
+            $subject = "Un message de votre site : Formulaire contact";
 
-        $fields = array();
-        $fields{"name"} = "name";
-        $fields{"email"} = "email";
-        $fields{"phone"} = "phone";
-        $fields{"message"} = "message";
+            $fields = array();
+            $fields{"name"} = "name";
+            $fields{"email"} = "email";
+            $fields{"phone"} = "phone";
+            $fields{"message"} = "message";
 
-        $body = "Here is what was sent:\n\n"; foreach($fields as $a => $b){   $body .= sprintf("%20s: %s\n",$b,$_REQUEST[$a]); }
+            $body = "Here is what was sent:\n\n";
+            foreach ($fields as $a => $b) {
+                $body .= sprintf("%20s: %s\n", $b, $_REQUEST[$a]);
+            }
 
-        $send = mail($to, $subject, $body, $headers);
+            $send = mail($to, $subject, $body, $headers);
+        }
+    case 'inscription':
     }
-}
-if (isset($erreur)) echo '<br /><br />',$erreur;
 ?>
 </body>
 </html>
