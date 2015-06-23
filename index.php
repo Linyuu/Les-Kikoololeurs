@@ -53,6 +53,28 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Contact Webmaster</h2>
+            <p>Kikoololeur GALLAND<br>
+                Lyon (69), France</p>
+            <p><a class="btn btn-default" href="mailto:maxence.galland@gmail.com" role="button"><span class="glyphicon glyphicon-envelope"></span> Envoyer un mail »</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Mentions légales</h2>
+            <p>Pour connaître les informations concernant le Site Web, ainsi que celle de l'hebergeur.</p>
+            <p><a class="btn btn-default" href="#" role="button">Cliquez ici »</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Suivez-nous !</h2>
+            <img src="images/facebook_logo.png" id="images_social_footer" title="Nous suivre sur Facebook !" alt="logo de facebook" /><img src="images/twitter_logo.png" id="images_social_footer" title="Nous suivre sur Twitter !" alt="logo de twitter" /><img src="images/google+_logo.png" id="images_social_footer" title="Nous suivre sur Google + !" alt="logo de google +" /><img src="images/rss_logo.png" id="images_social_footer" title="Nous suivre avec Flux RSS !" alt="logo de flux rss" />
+        </div>
+    </div>
+    <footer>
+        <p><span class="glyphicon glyphicon-copyright-mark"></span> Copyright IPHTEST 2015 <img src="images/logo_iphtest.png" id="footer_logo" alt="logo de iphtest" /></p>
+    </footer>
+</div>
 
 <!-- Partie PHP de connexion à l'espace membre fait par Sushi -->
 
@@ -80,78 +102,57 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
             header('Location: membre.php');
             exit();
             ?>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <img src="images/logo_iphtest.png" id="carousel-images" alt="logo de iphtest" /><br />
-                    <h1>Bienvenue sur IPHTEST !!!</h1>
-                    <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !<br>
-                        Alors n'attendez plus et inscrivez-vous !!!</p>
-                    <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <img src="images/logo_iphtest.png" id="carousel-images" alt="logo de iphtest" /><br />
+                                    <h1>Bienvenue sur IPHTEST !!!</h1>
+                                    <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !<br>
+                                        Alors n'attendez plus et inscrivez-vous !!!</p>
+                                    <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <img src="images/member.png" id="carousel-images" alt="logo de membre" /><br />
+                                    <h1>Venez découvrir notre espace membre</h1>
+                                    <p>Et si vous ajoutiez votre propre photo de profil !<br>
+                                        Pour découvrir cette option, connectez-vous ou inscrivez-vous !</p>
+                                    <p><a class="btn btn-lg btn-primary" href="connexion.php" role="button">Me Connecter</a>
+                                        <a class="btn btn-lg btn-primary" href="inscription.php" role="button">M'Inscrire</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-            </div>
-        </div>
-        <div class="item">
-            <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <img src="images/member.png" id="carousel-images" alt="logo de membre" /><br />
-                    <h1>Venez découvrir notre espace membre</h1>
-                    <p>Et si vous ajoutiez votre propre photo de profil !<br>
-                        Pour découvrir cette option, connectez-vous ou inscrivez-vous !</p>
-                    <p><a class="btn btn-lg btn-primary" href="connexion.php" role="button">Me Connecter</a>
-                        <a class="btn btn-lg btn-primary" href="inscription.php" role="button">M'Inscrire</a></p>
+                <div class="jumbotron">
+                    <div class="container">
+                        <h1>Bienvenue sur IPHTEST !!!</h1>
+                        <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !</p>
+                        <p>Alors n'attendez plus et inscrivez-vous !!!</p>
+                        <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-<div class="jumbotron">
-    <div class="container">
-        <h1>Bienvenue sur IPHTEST !!!</h1>
-        <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !</p>
-        <p>Alors n'attendez plus et inscrivez-vous !!!</p>
-        <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Contact Webmaster</h2>
-            <p>Kikoololeur GALLAND<br>
-            Lyon (69), France</p>
-            <p><a class="btn btn-default" href="mailto:maxence.galland@gmail.com" role="button"><span class="glyphicon glyphicon-envelope"></span> Envoyer un mail »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Mentions légales</h2>
-            <p>Pour connaître les informations concernant le Site Web, ainsi que celle de l'hebergeur.</p>
-            <p><a class="btn btn-default" href="#" role="button">Cliquez ici »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Suivez-nous !</h2>
-            <img src="images/facebook_logo.png" id="images_social_footer" title="Nous suivre sur Facebook !" alt="logo de facebook" /><img src="images/twitter_logo.png" id="images_social_footer" title="Nous suivre sur Twitter !" alt="logo de twitter" /><img src="images/google+_logo.png" id="images_social_footer" title="Nous suivre sur Google + !" alt="logo de google +" /><img src="images/rss_logo.png" id="images_social_footer" title="Nous suivre avec Flux RSS !" alt="logo de flux rss" />
-        </div>
-    </div>
-    <footer>
-        <p><span class="glyphicon glyphicon-copyright-mark"></span> Copyright IPHTEST 2015 <img src="images/logo_iphtest.png" id="footer_logo" alt="logo de iphtest" /></p>
-    </footer>
-</div>
+
 <?php
         }
         // si aucune réponse, le visiteur s'est trompé soit dans son login, soit dans son mot de passe
@@ -171,8 +172,8 @@ if ($contact=1){
     $to = "sebastien.bayle124@gmail.com";
     $from = $_REQUEST['email'];
     $name = $_REQUEST['name'];
-    $headers = "From: $from";
-    $subject = "You have a message sent from your site";
+    $headers = "De: $from";
+    $subject = "Un message de votre site : Formulaire contact";
 
     $fields = array();
     $fields{"name"} = "name";
