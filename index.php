@@ -236,7 +236,6 @@ case 'home':
         }
     break;
     case 'login':
-    <?php
 
 
 //vérifie que l'utilisateur est bien enregistré dans la BDD
@@ -254,13 +253,13 @@ if (!isset($_SESSION['login'])) {
     <body>
     <?php
     $member = new User;
-    $nom = $member->nom;
-    $prenom = $member->prenom;
-    $age = $member->age;
-    $adresse = $member->adresse;
-    $email = $member->email;
-    $login = $member->login;
-    $pass = $member->pass_md5;
+    $nom = $member->'nom';
+    $prenom = $member->'prenom';
+    $age = $member->'age';
+    $adresse = $member->'adresse';
+    $email = $member->'email';
+    $login = $member->'login';
+    $pass = $member->'pass_md5';
     ?>
 
     <p>Bienvenue <?php echo htmlentities(trim($_SESSION['login'])); ?> !</p><br />
