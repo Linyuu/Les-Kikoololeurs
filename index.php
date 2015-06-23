@@ -35,7 +35,7 @@
                 <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
                 <li><a href="inscription.php"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
                 <li><a href="connexion.php"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
-                <li><a href="<?php $contact=1?>"><span class="glyphicon glyphicon-magnet"></span> Contact</a></li>
+                <li><a href="index.php"><span class="glyphicon glyphicon-magnet"></span> Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Link</a></li>
@@ -168,7 +168,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
         $erreur = 'Au moins un des champs est vide.';
     }
 }
-if ($contact=1){
+if ($contact == 1){
     $to = "sebastien.bayle124@gmail.com";
     $from = $_REQUEST['email'];
     $name = $_REQUEST['name'];
