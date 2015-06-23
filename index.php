@@ -238,6 +238,17 @@ case 'home':
     case 'login':
     }
 ?>
+    <?php
+
+
+    //vérifie que l'utilisateur est bien enregistré dans la BDD
+
+    session_start();
+    if (!isset($_SESSION['login'])) {
+        header ('Location: index.php');
+        exit();
+    }
+    ?>
 </body>
 </html>
 
