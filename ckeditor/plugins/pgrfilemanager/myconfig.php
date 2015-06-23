@@ -29,12 +29,12 @@ THE SOFTWARE.
 //real absolute path to root directory (directory you want to use with PGRFileManager) on your server  
 //i.e  PGRFileManagerConfig::$rootPath = '/home/user/htdocs/userfiles'
 //you can check your absoulte path using
-PGRFileManagerConfig::$rootPath = 'C:\Users\Maxence GALLAND\Documents\GitHub\Les-Kikoololeurs\images';
+PGRFileManagerConfig::$rootPath = 'C:\xampp\htdocs\Kikoo\images';
 //url path to root directory
 //this path is using to display images and will be returned to ckeditor with relative path to selected file
 //i.e http://my-super-web-page/gallery
 //i.e /gallery
-PGRFileManagerConfig::$urlPath = 'http://127.0.0.1/cours/images';
+PGRFileManagerConfig::$urlPath = 'http://46.105.224.230/kikoo/images ';
 
 
 //    !!!How to determine rootPath and urlPath!!!

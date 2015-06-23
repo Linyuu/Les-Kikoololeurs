@@ -30,7 +30,7 @@
         /*
          * Nom de la base de données
          */
-        private $_database = 'news_system';
+        private $_database = 'test';
 		
 		/*
 		 * Constructeur
