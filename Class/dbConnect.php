@@ -30,7 +30,7 @@
         /*
          * Nom de la base de données
          */
-        private $_database = 'test';
+        private $_database = 'news_system';
 		
 		/*
 		 * Constructeur
@@ -45,12 +45,13 @@
 		 * Create article into database 'news'
 		 */
 
-        function CreateDbNews($title, $author, $content){
+        function CreateDbNews($title, $author, $description, $content){
             //insertion de l'article dans la base de données
-            $result = $this->_connect->prepare('INSERT INTO news (title, author, content) VALUES(:title, :author, :content)');
+            $result = $this->_connect->prepare('INSERT INTO news (title, author, description, content) VALUES(:title, :author, :description, :content)');
             $result->execute(array(
                 "title" => $title,
                 "author" => $author,
+                "description" => $description,
                 "content" => $content
             ));
 
@@ -87,14 +88,15 @@
          * Modify articles from database 'news'
          */
 
-        function modifyDbNews($id, $title, $author, $content){
+        function modifyDbNews($id, $title, $author, $description, $content){
             //modification de l'article
 
-            $request = $this->_connect->prepare('UPDATE news SET title=:title, author=:author, content=:content WHERE id="'.$id.'"');
+            $request = $this->_connect->prepare('UPDATE news SET title=:title, author=:author, description=:description, content=:content WHERE id="'.$id.'"');
 
             $result =  $request->execute(array(
                 "title" => $title,
                 "author" => $author,
+                "description" => $description,
                 "content" => $content
             ));
 

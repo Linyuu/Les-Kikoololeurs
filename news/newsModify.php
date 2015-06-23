@@ -17,51 +17,17 @@
 <!-- Initialisation du java de bootstrap -->
 <script src="../js/bootstrap.min.js"></script>
 
-<!-- Menu de navigation -->
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="../images/logo_iphtest.png" alt="logo de iphtest" /></a>
-        </div>
+<!-- Initialisation de CKEDITOR -->
+<script src="../ckeditor/ckeditor.js"></script>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="../index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
-                <li><a href="inscription.php"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
-                <li><a href="connexion.php"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+
+
+<!-- Menu de navigation -->
+<?php include "../view/menu.php" ?>
+
 <div class="jumbotron">
     <div class="container">
-        <h1>Bienvenue sur IPHTEST !!!</h1>
-        <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !</p>
-        <p>Alors n'attendez plus et inscrivez-vous !!!</p>
-        <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
         <?php
-
         if(isset($_GET['action'])){ //on vérifie que l'on à bien reçu une action
             $action = addslashes(htmlentities($_GET['action'])); //on sécurise l'action en l'insérant dans une variable
 
@@ -74,13 +40,21 @@
                         $news = $newsSelect->getDbNewsId($id) ;
                         if($news) {
                             ?>
+                            <h3 align="center">- Modifier une news -</h3>
                             <form method="post" action="newsModify.php?action=modifyDbNews">
-                                <label for="title">Titre de la news: </label><input type="text" name="title" id="title" value="<?php echo $news['title']; ?>"><br/>
-                                <label for="author">Auteur de la news: </label><input type="text" name="author" id="author" value="<?php echo $news['author']; ?>"><br/>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">Titre de la news</span>
+                                    <input type="text" class="form-control" placeholder="Titre" aria-describedby="basic-addon1" value="<?php echo $news['title']; ?>" name="title">
+                                </div><br/>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">Auteur de la news</span>
+                                    <input type="text" class="form-control" placeholder="Auteur" aria-describedby="basic-addon1" value="<?php echo $news['author']; ?>" name="author">
+                                </div><br/>
                                 <input type="hidden" name="id" value="<?php echo $news['id']; ?>"><br/>
-                                <label for="content">Contenu de la news: </label><textarea rows="8" cols="50" name="content" id="content"><?php echo $news['content']; ?></textarea><br/>
+                                <label for="description">Description de la news:</label><textarea rows="8" cols="50" name="description" id="editor1"><?php echo $news['description']; ?></textarea><br /><script>CKEDITOR.replace( 'editor1' );</script>
+                                <label for="content">Contenu de la news: </label><textarea rows="8" cols="50" name="content" id="editor2"><?php echo $news['content']; ?></textarea><br/><script>CKEDITOR.replace( 'editor2' );</script>
                                 <br/>
-                                <input type="submit" value="Modifier la news >>"/>
+                                <input type="submit" value="Modifier la news >>" class="btn btn-lg btn-primary" role="button" />
                             </form>
                         <?php
                         }
@@ -96,15 +70,15 @@
                         header('Refresh: 5, newsPage.php');
                     }
 
-                    break;//récupération de la news et affichage dans un formulaire
+                    break; //récupération de la news et affichage dans un formulaire
 
 
 
                 case "modifyDbNews": //modification de la news en base de données
-                    if(isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['id']) AND isset($_POST['content'])){
+                    if(isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['id']) AND isset($_POST['description']) AND isset($_POST['content'])){
                         include "../class/newsObject.php";
                         $newsModify = new news();
-                        if($newsModify->modifyNews($_POST['id'], $_POST['title'], $_POST['author'], $_POST['content']) == true){
+                        if($newsModify->modifyNews($_POST['id'], $_POST['title'], $_POST['author'], $_POST['description'], $_POST['content']) == true){
                             echo '<div class="alert alert-success" role="alert">La news à bien été modifiée !!</div>';
                             header('Refresh:5, newsPage.php');
                         }
@@ -150,4 +124,5 @@
 </div>
 
 </body>
+
 </html>

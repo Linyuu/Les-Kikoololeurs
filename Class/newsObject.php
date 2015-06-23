@@ -27,6 +27,14 @@ include "dbConnect.php";
          */
         private $_author;
 
+
+        /*
+         * Description de la news
+         */
+        private $_description;
+
+
+
         /*
          * contenu de la news
          */
@@ -43,16 +51,17 @@ include "dbConnect.php";
         /*
          *fonction pour créer des news
          */
-        function createNews($title, $author, $content){
+        function createNews($title, $author, $description, $content){
             //securisation des variables
 
+            $this->_description = addslashes(htmlentities($description));
             $this->_author = addslashes(htmlentities($author));
             $this->_title = addslashes(htmlentities($title));
             $this->_content = addslashes(htmlentities($content));
 
 
 
-            return $this->_dbCo->createDbNews($title, $author, $content);
+            return $this->_dbCo->createDbNews($title, $author, $description, $content);
         }
 
         /*
@@ -71,14 +80,15 @@ include "dbConnect.php";
         /*
          * Fonction de modification de news
          */
-        function modifyNews($id, $title, $author, $content){
+        function modifyNews($id, $title, $author, $description, $content){
             //sécurisation des variables
             $this->_id = addslashes(htmlentities($id));
             $this->_title = addslashes(htmlentities($title));
             $this->_author = addslashes(htmlentities($author));
+            $this->_description = addslashes(htmlentities($description));
             $this->_content = addslashes(htmlentities($content));
 
-            return $this->_dbCo->modifyDbNews($id, $title, $author, $content);
+            return $this->_dbCo->modifyDbNews($id, $title, $author, $description, $content);
         }
     }
 
