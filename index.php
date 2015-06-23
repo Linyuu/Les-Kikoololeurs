@@ -11,11 +11,14 @@
     <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/carousel.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="css/table.css" />
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
+
+
 <!-- Initialisation de jquery -->
 <script src="js/jquery.min.js"></script>
 
@@ -128,6 +131,7 @@ case 'home':
 
         <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
     </div>
+    </div>
     <?php
     break;
     case 'contact':
@@ -185,58 +189,150 @@ case 'home':
 
     //vérifie que l'utilisateur est bien enregistré dans la BDD
 
-    session_start();
+    /*session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php');
         exit();
-    }
+    }*/
     ?>
 
 
     <!-- l'utilisateur est bien authentifié on le renvoit à l'espace membre. -->
 
-    <body>
     <?php
+    echo '<div class="jumbotron">';
+    echo '<div class="container">';
+    echo '<br />';
+    echo '<h3 align="center">- Se Connecter -</h3>';
+    echo '<br />';
+    echo '<br />';
+    if(isset($_POST['login'])) {
+        $login = addslashes(htmlentities($_POST['login']));
+        /*include "class/classUser.php";
+        $member = new User();*/
+        include "class/dbConnect.php";
+        $infos = new dbConnect();
+        $table = $infos->GetOneUser($login);
+        /*$member = new User;*/
 
-    $member = new User();
-    include "class/dbconnect.php";
-    $infos = new dbConnect();
-    $table = $infos->GetOneUser($login);
-    $member = new User;
 
+        if ($infos == true) {
+            session_start();
+            $_SESSION['login'] = $table['login'];
+            ?>
 
+            <p>Bienvenue <?php echo htmlentities(trim($_SESSION['login'])); ?> !</p><br/>
+            <div class="datagrid"><table>
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Age</th>
+                    <th>Adresse</th>
+                    <th>Email</th>
+                    <th>Login</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo $table['nom']; ?></td>
+                    <td><?php echo $table['prenom']; ?></td>
+                    <td><?php echo $table['age']; ?></td>
+                    <td><?php echo $table['adresse']; ?></td>
+                    <td><?php echo $table['email']; ?></td>
+                    <td><?php echo $table['login']; ?></td>
+                </tr>
+                </tbody>
+            </table></div>
+        <?php }?>
+        <a href="index.php?action=logout">Déconnexion</a>
+    <?php
+    }
 
-
-    if ($infos == true) {
+    else{
         ?>
-
-        <p>Bienvenue <?php echo htmlentities(trim($_SESSION['login'])); ?> !</p><br/>
-        <table>
-            <thead>
-            <tr>
-                <td>Nom</td>
-                <td>Prenom</td>
-                <td>Age</td>
-                <td>Adresse</td>
-                <td>Email</td>
-                <td>Login</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><?php echo $table['nom']; ?></td>
-                <td><?php echo $table['prenom']; ?></td>
-                <td><?php echo $table['age']; ?></td>
-                <td><?php echo $table['adresse']; ?></td>
-                <td><?php echo $table['email']; ?></td>
-                <td><?php echo $table['login']; ?></td>
-            </tr>
-            </tbody>
-        </table>
-    <?php }?>
-    <a href="deconnexion.php">Déconnexion</a>
-    <?php
+        <br/>
+            <form method="post" action="index.php?action=login">
+                Votre login: <input type="text" name="login" />
+                <input type="submit" value="Se Connecter" />
+            </form>
+        <?php
+    }
+    echo '</div>';
+    echo '</div>';
     break;
+
+    case "inscription":
+        if(isset($_POST['name']) AND isset($_POST['surname']) AND isset($_POST['age']) AND isset($_POST['address']) AND isset($_POST['mail']) AND isset($_POST['login']) AND isset($_POST['password'])){
+            include "class/dbConnect.php";
+            $createUser = new dbConnect();
+            if($createUser->createDbUser($_POST['name'], $_POST['surname'], $_POST['age'], $_POST['address'], $_POST['mail'], $_POST['login'], $_POST['password']) == true){
+                echo'<div class="alert alert-success" role="alert">Votre inscription à bien été prise en compte !!</div>';
+                header('Refresh:5, index.php?action=login');
+            }
+        }
+
+        else {
+            ?>
+            <div class="jumbotron">
+                <div class="container">
+                    <br/>
+                    <h3 align="center">- Inscription -</h3>
+                    <br/>
+                    <form method="post" action="index.php?action=inscription">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Votre nom:</span>
+                            <input type="text" class="form-control" placeholder="Votre nom" aria-describedby="basic-addon1" name="name">
+                        </div>
+                        <br/>
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Votre prénom:</span>
+                            <input type="text" class="form-control" placeholder="Votre prénom" aria-describedby="basic-addon1" name="surname">
+                        </div>
+                        <br/>
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Votre âge</span>
+                            <input type="text" class="form-control" placeholder="Votre age" aria-describedby="basic-addon1" name="age">
+                        </div>
+                        <br/>
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Votre adresse</span>
+                            <input type="text" class="form-control" placeholder="Votre adresse" aria-describedby="basic-addon1" name="address">
+                        </div>
+                        <br/>
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Votre email</span>
+                            <input type="text" class="form-control" placeholder="Votre Email" aria-describedby="basic-addon1" name="mail">
+                        </div>
+                        <br/>
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">votre login</span>
+                            <input type="text" class="form-control" placeholder="Votre login" aria-describedby="basic-addon1" name="login">
+                        </div>
+                        <br/>
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Votre mot de passe:</span>
+                            <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
+                        </div>
+                        <br/>
+                        <input type="submit" value="M'inscrire !" class="btn btn-lg btn-primary"/>
+                    </form>
+                </div>
+            </div>
+        <?php
+        }
+    break;
+
+    case "logout": //déconnexion des users
+        session_destroy();
+        header('Location:index.php');
+    break; //fin de la déconnexion des users
 
     }
     ?>

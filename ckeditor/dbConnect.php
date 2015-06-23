@@ -30,7 +30,7 @@
         /*
          * Nom de la base de données
          */
-        private $_database = 'test';
+        private $_database = 'news_system';
 		
 		/*
 		 * Constructeur
@@ -130,30 +130,9 @@
 
 		
 		function GetOneUser($login){
-			$result = $this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "'");
-
-            $info = $result->fetch();
-			return $info;
+			$this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "'");
+			
+			return $this->_connect->fetch();
 		}
-
-
-        /*
-         * Create user in database membre
-         */
-
-        function createDbUser($nom, $prenom, $age, $adresse, $email, $login, $pass_md5){
-            $request = $this->_connect->prepare('INSERT INTO membre (nom, prenom, age, adresse, email, login, pass_md5) VALUES(:nom, :prenom, :age, :adresse, :email, :login, :pass_md5)');
-            $request->execute(array(
-                "nom" => addslashes(htmlentities($nom)),
-                "prenom" => addslashes(htmlentities($prenom)),
-                "age" => addslashes(htmlentities($age)),
-                "adresse" => addslashes(htmlentities($adresse)),
-                "email" => addslashes(htmlentities($email)),
-                "login" => addslashes(htmlentities($login)),
-                "pass_md5" => addslashes(htmlentities(md5($pass_md5)))
-            ));
-
-            return true;
-        }
 	}
 ?>
