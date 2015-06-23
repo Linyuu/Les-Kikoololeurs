@@ -129,5 +129,23 @@
 			$result->execute();
 			
 		}
+		
+		//Liste de tous les utilisateurs
+		
+		public listUser()
+		{
+			$connexion = new dbConnect;
+			$liste = $connexion->GetMyUsers();
+			return $liste;
+		}
+		
+		//Affichage d'un seul utilisateur
+		
+		public afficheUser()
+		{
+			$connexion = new dbConnect;
+			$membre = $connexion->GetOneUser();
+			return $membre;
+		}
 	}
 ?>
