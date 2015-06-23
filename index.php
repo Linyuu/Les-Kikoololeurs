@@ -33,8 +33,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
-                <li><a href="inscription.php"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
-                <li><a href="connexion.php"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
+                <li><a href="index.php?action=home"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
+                <li><a href="index.php?action=login"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
                 <li><a href="index.php?action=contact"><span class="glyphicon glyphicon-magnet"></span> Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -84,12 +84,12 @@
 if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     if ((isset($_POST['login']) && !empty($_POST['login'])) && (isset($_POST['pass']) && !empty($_POST['pass']))) {
 
-        $base = mysql_connect ('serveur', 'login', 'password');
-        mysql_select_db ('nom_base', $base);
+        $base = mysql_connect('serveur', 'login', 'password');
+        mysql_select_db('nom_base', $base);
 
         // on teste si une entrée de BDD contient login / pass
-        $sql = 'SELECT count(*) FROM membre WHERE login="'.mysql_escape_string($_POST['login']).'" AND pass_md5="'.mysql_escape_string(md5($_POST['pass'])).'"';
-        $req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
+        $sql = 'SELECT count(*) FROM membre WHERE login="' . mysql_escape_string($_POST['login']) . '" AND pass_md5="' . mysql_escape_string(md5($_POST['pass'])) . '"';
+        $req = mysql_query($sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysql_error());
         $data = mysql_fetch_array($req);
 
         mysql_free_result($req);
@@ -101,74 +101,67 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
             $_SESSION['login'] = $_POST['login'];
             header('Location: membre.php');
             exit();
-            ?>
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-                            <div class="container">
-                                <div class="carousel-caption">
-                                    <img src="images/logo_iphtest.png" id="carousel-images" alt="logo de iphtest" /><br />
-                                    <h1>Bienvenue sur IPHTEST !!!</h1>
-                                    <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !<br>
-                                        Alors n'attendez plus et inscrivez-vous !!!</p>
-                                    <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-                            <div class="container">
-                                <div class="carousel-caption">
-                                    <img src="images/member.png" id="carousel-images" alt="logo de membre" /><br />
-                                    <h1>Venez découvrir notre espace membre</h1>
-                                    <p>Et si vous ajoutiez votre propre photo de profil !<br>
-                                        Pour découvrir cette option, connectez-vous ou inscrivez-vous !</p>
-                                    <p><a class="btn btn-lg btn-primary" href="connexion.php" role="button">Me Connecter</a>
-                                        <a class="btn btn-lg btn-primary" href="inscription.php" role="button">M'Inscrire</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-                <div class="jumbotron">
-                    <div class="container">
-                        <h1>Bienvenue sur IPHTEST !!!</h1>
-                        <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !</p>
-                        <p>Alors n'attendez plus et inscrivez-vous !!!</p>
-                        <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
-                    </div>
-                </div>
-
-<?php
         }
-        // si aucune réponse, le visiteur s'est trompé soit dans son login, soit dans son mot de passe
-        elseif ($data[0] == 0) {
-            $erreur = 'Compte non reconnu.';
-        }
-        // sinon, problème à l'horizon.
         else {
-            $erreur = 'Problème dans la base de données : plusieurs membres ont les mêmes identifiants de connexion.';
+                echo ("erreur de connexion");
         }
-    }
-    else {
-        $erreur = 'Au moins un des champs est vide.';
     }
 }
-if ($GET == contact){
+
+switch ($_GET['actionPage']){
+            case 'home':
+        ?>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <img src="images/logo_iphtest.png" id="carousel-images" alt="logo de iphtest" /><br />
+                    <h1>Bienvenue sur IPHTEST !!!</h1>
+                    <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !<br>
+                        Alors n'attendez plus et inscrivez-vous !!!</p>
+                    <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <img src="images/member.png" id="carousel-images" alt="logo de membre" /><br />
+                    <h1>Venez découvrir notre espace membre</h1>
+                    <p>Et si vous ajoutiez votre propre photo de profil !<br>
+                        Pour découvrir cette option, connectez-vous ou inscrivez-vous !</p>
+                    <p><a class="btn btn-lg btn-primary" href="connexion.php" role="button">Me Connecter</a>
+                        <a class="btn btn-lg btn-primary" href="inscription.php" role="button">M'Inscrire</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div class="jumbotron">
+    <div class="container">
+        <h1>Bienvenue sur IPHTEST !!!</h1>
+        <p>Iphtest vous souhaite la bienvenue! Vous souhaitez créer un compte, et ajouter une image à votre profil !</p>
+        <p>Alors n'attendez plus et inscrivez-vous !!!</p>
+        <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
+    </div>
+    <?php
+    case 'contact':
     ?>
     <form id="contact" name="contact" method="post">
         <fieldset>
