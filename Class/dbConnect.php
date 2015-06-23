@@ -130,7 +130,7 @@
 
 		
 		function GetOneUser($login){
-			$this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "';");
+			$this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "'");
 			
 			return $this->_connect->fetch();
 		}

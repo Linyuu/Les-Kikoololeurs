@@ -146,24 +146,9 @@ case 'home':
                 <label for="Message" id="message">Message<span class="required">*</span></label>
                 <textarea name="message" id="message" required></textarea>
 
-                <label for="Captcha" id="captcha">Name the small house pet that says "<i>meow</i>"<span
-                        class="required">*</span></label>
-                <input type="text" name="captcha" value="" required/>
-
                 <input id="submit" type="submit" name="submit" value="Send"/>
             </fieldset>
         </form>
-
-        <div id="success">
-  <span>
-    Votre message a été correctement envoyé
-  </span>
-        </div>
-
-        <div id="error">
-  <span>
-    Quelque chose s'est mal passé, le message n'a pas été envoyé
-  </span>
         </div>
         <?php
         if (isset($POST)) {
@@ -205,10 +190,22 @@ case 'home':
 
     <body>
     <?php
+<<<<<<< HEAD
     $member = new User();
     include "class/dbconnect.php";
     $infos = new dbConnect();
     $table = $infos->GetOneUser($login);
+=======
+    $member = new User;
+    $nom = $member->'nom';
+    $prenom = $member->'prenom';
+    $age = $member->'age';
+    $adresse = $member->'adresse';
+    $email = $member->'email';
+    $login = $member->'login';
+    $pass = $member->'pass_md5';
+    ?>
+>>>>>>> origin/master
 
     if ($infos == true) {
         ?>
