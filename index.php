@@ -37,6 +37,7 @@
                 <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
                 <li><a href="inscription.php"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
                 <li><a href="connexion.php"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
+                <li><a href="/Class/Contact.php"><span class="glyphicon glyphicon-lock"></span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Link</a></li>
