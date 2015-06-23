@@ -109,7 +109,7 @@
     <div class="row">
         <div class="col-md-4">
             <h2>Contact Webmaster</h2>
-            <p>Maxence GALLAND<br>
+            <p>Kikoololeur GALLAND<br>
             Lyon (69), France</p>
             <p><a class="btn btn-default" href="mailto:maxence.galland@gmail.com" role="button"><span class="glyphicon glyphicon-envelope"></span> Envoyer un mail »</a></p>
         </div>
