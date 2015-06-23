@@ -129,9 +129,6 @@
     </footer>
 </div>
 
-</body>
-</html>
-
 
 
 <!-- Partie PHP de connexion à l'espace membre fait par Sushi -->
@@ -174,12 +171,10 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     }
 }
 ?>
-<html>
 <head>
     <title>Accueil</title>
 </head>
 
-<body>
 Connexion à l'espace membre :<br />
 <form action="index.php" method="post">
     Login : <input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"><br />
