@@ -1,7 +1,12 @@
+<?php
+    if(empty($_GET['action'])) {
+        $_GET['action'] = 'home';
+    }
+?>
 <!DOCTYPE html>
     <html>
 <head>
-    <title><?php echo $_POST['actionPage']; ?></title>
+    <title><?php echo $_GET['action']; ?></title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
@@ -16,65 +21,12 @@
 
 <!-- Initialisation du java de bootstrap -->
 <script src="js/bootstrap.min.js"></script>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="images/logo_iphtest.png" alt="logo de iphtest" /></a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
-                <li><a href="index.php?action=home"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
-                <li><a href="index.php?action=login"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
-                <li><a href="index.php?action=contact"><span class="glyphicon glyphicon-magnet"></span> Contact</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Contact Webmaster</h2>
-            <p>Kikoololeur GALLAND<br>
-                Lyon (69), France</p>
-            <p><a class="btn btn-default" href="mailto:maxence.galland@gmail.com" role="button"><span class="glyphicon glyphicon-envelope"></span> Envoyer un mail »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Mentions légales</h2>
-            <p>Pour connaître les informations concernant le Site Web, ainsi que celle de l'hebergeur.</p>
-            <p><a class="btn btn-default" href="#" role="button">Cliquez ici »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Suivez-nous !</h2>
-            <img src="images/facebook_logo.png" id="images_social_footer" title="Nous suivre sur Facebook !" alt="logo de facebook" /><img src="images/twitter_logo.png" id="images_social_footer" title="Nous suivre sur Twitter !" alt="logo de twitter" /><img src="images/google+_logo.png" id="images_social_footer" title="Nous suivre sur Google + !" alt="logo de google +" /><img src="images/rss_logo.png" id="images_social_footer" title="Nous suivre avec Flux RSS !" alt="logo de flux rss" />
-        </div>
-    </div>
-    <footer>
-        <p><span class="glyphicon glyphicon-copyright-mark"></span> Copyright IPHTEST 2015 <img src="images/logo_iphtest.png" id="footer_logo" alt="logo de iphtest" /></p>
-    </footer>
-</div>
+<!--affichage du menu -->
+<?php
+    include "view/menu.php";
+?>
+
 
 <!-- Partie PHP de connexion à l'espace membre fait par Sushi -->
 
@@ -234,62 +186,84 @@ case 'home':
 
             $send = mail($to, $subject, $body, $headers);
         }
-    break;
+        break;
     case 'login':
-    <?php
 
 
-//vérifie que l'utilisateur est bien enregistré dans la BDD
 
-session_start();
-if (!isset($_SESSION['login'])) {
-    header ('Location: index.php');
-    exit();
-}
-?>
+    //vérifie que l'utilisateur est bien enregistré dans la BDD
+
+    session_start();
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php');
+        exit();
+    }
+    ?>
 
 
     <!-- l'utilisateur est bien authentifié on le renvoit à l'espace membre. -->
 
     <body>
     <?php
-    $member = new User;
-    $nom = $member->nom;
-    $prenom = $member->prenom;
-    $age = $member->age;
-    $adresse = $member->adresse;
-    $email = $member->email;
-    $login = $member->login;
-    $pass = $member->pass_md5;
-    ?>
+    $member = new User();
+    include "class/dbconnect.php";
+    $infos = new dbConnect();
+    $table = $infos->GetOneUser($login);
 
-    <p>Bienvenue <?php echo htmlentities(trim($_SESSION['login'])); ?> !</p><br />
-    <table>
-        <thead>
-        <tr>
-            <td>Nom</td>
-            <td>Prenom</td>
-            <td>Age</td>
-            <td>Adresse</td>
-            <td>Email</td>
-            <td>Login</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><?php echo $nom?></td>
-            <td><?php echo $prenom?></td>
-            <td><?php echo $age?></td>
-            <td><?php echo $adresse?></td>
-            <td><?php echo $email?></td>
-            <td><?php echo $login?></td>
-        </tr>
-        </tbody>
-    </table>
+    if ($infos == true) {
+        ?>
 
+        <p>Bienvenue <?php echo htmlentities(trim($_SESSION['login'])); ?> !</p><br/>
+        <table>
+            <thead>
+            <tr>
+                <td>Nom</td>
+                <td>Prenom</td>
+                <td>Age</td>
+                <td>Adresse</td>
+                <td>Email</td>
+                <td>Login</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?php echo $table['nom']; ?></td>
+                <td><?php echo $table['prenom']; ?></td>
+                <td><?php echo $table['age']; ?></td>
+                <td><?php echo $table['adresse']; ?></td>
+                <td><?php echo $table['email']; ?></td>
+                <td><?php echo $table['login']; ?></td>
+            </tr>
+            </tbody>
+        </table>
+    <?php }?>
     <a href="deconnexion.php">Déconnexion</a>
-?>
+    <?php
+    break;
 
+    }
+    ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Contact Webmaster</h2>
+                <p>Kikoololeur GALLAND<br>
+                    Lyon (69), France</p>
+                <p><a class="btn btn-default" href="mailto:maxence.galland@gmail.com" role="button"><span class="glyphicon glyphicon-envelope"></span> Envoyer un mail »</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Mentions légales</h2>
+                <p>Pour connaître les informations concernant le Site Web, ainsi que celle de l'hebergeur.</p>
+                <p><a class="btn btn-default" href="#" role="button">Cliquez ici »</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Suivez-nous !</h2>
+                <img src="images/facebook_logo.png" id="images_social_footer" title="Nous suivre sur Facebook !" alt="logo de facebook" /><img src="images/twitter_logo.png" id="images_social_footer" title="Nous suivre sur Twitter !" alt="logo de twitter" /><img src="images/google+_logo.png" id="images_social_footer" title="Nous suivre sur Google + !" alt="logo de google +" /><img src="images/rss_logo.png" id="images_social_footer" title="Nous suivre avec Flux RSS !" alt="logo de flux rss" />
+            </div>
+        </div>
+        <footer>
+            <p><span class="glyphicon glyphicon-copyright-mark"></span> Copyright IPHTEST 2015 <img src="images/logo_iphtest.png" id="footer_logo" alt="logo de iphtest" /></p>
+        </footer>
+    </div>
 </body>
 </html>
-

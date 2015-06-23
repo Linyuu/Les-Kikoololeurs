@@ -1,5 +1,5 @@
 <?php
-	public class User
+    class User
 	{
 		//Propriétés (variables)
 		private $nom;
@@ -17,86 +17,81 @@
 		private $pass_md5;
 		
 		//Constructeur
-		public __construct($login)
+		function __construct()
 		{
+            include "dbConnect.php";
 			$connexion = new dbConnect;
-			$infos = $connexion->GetOneUser($login);
-			$this->nom = $infos['nom'];
-			$this->prenom = $infos['prenom'];
-			$this->age = $infos['age'];
-			$this->adresse = $infos['adresse'];
-			$this->email = $infos['email'];
-			$this->login = $infos['login'];
-			$this->pass_md5 = $infos['pass_md5'];
+
+
 		}
 		
 		//Setters/Getters
-		public setnom($nom)
+		function setnom($nom)
 		{
 			$this->nom = $nom;
 		}
 		
-		public getnom()
+		function getnom()
 		{
 			return $this->nom;
 		}
 		
-		public setprenom($prenom)
+		function setprenom($prenom)
 		{
 			$this->prenom = $prenom;
 		}
 		
-		public getprenom()
+		function getprenom()
 		{
 			return $this->prenom;
 		}
 		
-		public setage($age)
+		function setage($age)
 		{
 			$this->age = $age;
 		}
 		
-		public getage()
+		function getage()
 		{
 			return $this->age;
 		}
 		
-		public setadresse($adresse)
+		function setadresse($adresse)
 		{
 			$this->adresse = $adresse;
 		}
 		
-		public getadresse()
+		function getadresse()
 		{
 			return $this->adresse;
 		}
 		
-		public setemail($mail)
+		function setemail($mail)
 		{
-			$this->prenom = $prenom;
+			$this->email = $mail;
 		}
 		
-		public getemail()
+		function getemail()
 		{
 			return $this->email;
 		}
 		
-		public setlogin($login)
+		function setlogin($login)
 		{
 			$this->login = $login;
 		}
 		
-		public getlogin()
+		function getlogin()
 		{
 			return $this->login;
 		}
 		
-		public setpass_md5($pass_md5)
+		function setpass_md5($pass_md5)
 		{
 			$this->pass_md5 = $pass_md5;
 		}
 		
-		public getpass_md5()
+		function getpass_md5()
 		{
 			return $this->pass_md5;
 		}
@@ -104,7 +99,7 @@
 		//Creation d'un utilisateur
 		//On passe en argument toutes les infos à inserer en base de données, infos issus des champs du formulaire d'inscription
 		
-		public createUser($nom, $prenom, $age, $adresse, $email, $login, $pass_md5)
+		function createUser($nom, $prenom, $age, $adresse, $email, $login, $pass_md5)
 		{
 			$connexion = new dbConnect;
 			$result = $this->_connect->prepare('INSERT INTO membre (nom, prenom, age, adresse, email, login, pass_md5) VALUES(:nom, :prenom, :age, :adresse, :email, :login, :pass_md5)');
@@ -124,7 +119,7 @@
 		//Suppression d'un utilisateur
 		//On passe un login à cette methode pour cibler l'utilisateur à supprimer
 		
-		public deleteUser($login)
+		function deleteUser($login)
 		{
 			$connexion = new dbConnect;
 			$result = $this->_connect->prepare('DELETE FROM membre WHERE login="' . $login . '";');
@@ -134,7 +129,7 @@
 		
 		//Liste de tous les utilisateurs
 		
-		public listUser()
+		function listUser()
 		{
 			$connexion = new dbConnect;
 			$liste = $connexion->GetMyUsers();
@@ -143,10 +138,10 @@
 		
 		//Affichage d'un seul utilisateur
 		
-		public afficheUser()
+		function afficheUser()
 		{
 			$connexion = new dbConnect;
-			$membre = $connexion->GetOneUser();
+			$membre = $connexion->GetOneUser($this->login);
 			return $membre;
 		}
 		
@@ -154,7 +149,7 @@
 		//On passe à cette méthode un attribut à modifier, une nouvelle valeur à donner à cette attribut et un login pour cibler l'utilisateur
 		//Idee d'amelioration : Passer un tableau à $attribut pour en modif plusieurs à la fois avec un foreach().
 		
-		public modifUser($attribut, $newvaleur, $login)
+		function modifUser($attribut, $newvaleur, $login)
 		{
 			$connexion = new dbConnect;
 			$connexion->prepare('UPDATE membre SET ' . $attribut . ' = "' . $newvaleur . '" WHERE login="' . $login . '";');
