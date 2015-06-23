@@ -101,6 +101,21 @@
 			return $this->pass_md5;
 		}
 		
-		
+		public createUser($nom, $prenom, $age, $adresse, $email, $login, $pass_md5)
+		{
+			$connexion = new dbConnect;
+			$result = $this->_connect->prepare('INSERT INTO membre (nom, prenom, age, adresse, email, login, pass_md5) VALUES(:nom, :prenom, :age, :adresse, :email, :login, :pass_md5)');
+			$result->execute(array(
+                "nom" => $nom,
+                "prenom" => $prenom,
+                "age" => $age,
+				"adresse" => $adresse,
+                "email" => $email,
+                "login" => $login,
+				"pass_md5" => $pass_md5
+            ));
+			
+			return $result;
+		}
 	}
 ?>
