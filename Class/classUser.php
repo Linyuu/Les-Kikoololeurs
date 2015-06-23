@@ -102,6 +102,7 @@
 		}
 		
 		//Creation d'un utilisateur
+		//On passe en argument toutes les infos à inserer en base de données, infos issus des champs du formulaire d'inscription
 		
 		public createUser($nom, $prenom, $age, $adresse, $email, $login, $pass_md5)
 		{
@@ -121,6 +122,7 @@
 		}
 		
 		//Suppression d'un utilisateur
+		//On passe un login à cette methode pour cibler l'utilisateur à supprimer
 		
 		public deleteUser($login)
 		{
@@ -149,6 +151,9 @@
 		}
 		
 		//Modification d'un utilisateur
+		//On passe à cette méthode un attribut à modifier, une nouvelle valeur à donner à cette attribut et un login pour cibler l'utilisateur
+		//Idee d'amelioration : Passer un tableau à $attribut pour en modif plusieurs à la fois avec un foreach().
+		
 		public modifUser($attribut, $newvaleur, $login)
 		{
 			$connexion = new dbConnect;
