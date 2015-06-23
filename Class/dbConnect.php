@@ -30,7 +30,7 @@
         /*
          * Nom de la base de données
          */
-        private $_database = 'news_system';
+        private $_database = 'test';
 		
 		/*
 		 * Constructeur
@@ -75,8 +75,8 @@
          */
 
         function getDbNewsId($id){
-            $result = $this->_connect->query('SELECT * FROM news WHERE id='.$id.'');
-            return true;
+            $result = $this->_connect->query('SELECT * FROM news WHERE id='.$id.'')->fetch();
+            return $result;
 
         }
 
@@ -87,8 +87,22 @@
          * Modify articles from database 'news'
          */
 
-        function modifyDbNews(){
+        function modifyDbNews($id, $title, $author, $content){
             //modification de l'article
+
+            $request = $this->_connect->prepare('UPDATE news SET title=:title, author=:author, content=:content WHERE id="'.$id.'"');
+
+            $result =  $request->execute(array(
+                "title" => $title,
+                "author" => $author,
+                "content" => $content
+            ));
+
+            if ($result){
+                return true;
+            }
+
+            return false;
         }
 
 

@@ -64,7 +64,7 @@
                 echo '<h1>'.$news['title'].'</h1>';
                 echo '<p>'.$news['content'].'</p>';
                 echo '<p>Par: '.$news['author'].'</p>';
-                echo '<p><a class="btn btn-lg btn-primary" role="button" href="newsModify.php?id='.$news['id'].'">Modifier >></a>';
+                echo '<p><a class="btn btn-lg btn-primary" role="button" href="newsModify.php?action=modifyNews&amp;id='.$news['id'].'">Modifier >></a>';
                 echo '</div>';
                 echo '</div>';
                 echo '<br />';

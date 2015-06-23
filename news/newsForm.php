@@ -100,8 +100,8 @@
     <div class="container">
         <h1>Création de news !!!</h1>
         <?php
-        //index
-        if (isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['content'])){
+        //Création d'une news
+        if (isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['content'])){ //on vérifie si on reçoit des informations
             include "Class/newsObject.php";
             $news = new news();
             if ($news->createNews($_POST['title'], $_POST['author'],$_POST['content']) == true){
@@ -110,9 +110,9 @@
                 echo '<div class="alert alert-danger" role="alert">La news n\'à pas été crée !!!</div>';
             }
 
-        }else {
+        }else { //sinon la news n'a pas été créé et on affiche le formulaire
             ?>
-            <form method="post" action="form_news.php">
+            <form method="post" action="newsForm.php">
                 <label for="title">Titre de la news: </label><input type="text" name="title" id="title"><br/>
                 <label for="author">Auteur de la news: </label><input type="text" name="author" id="author"><br/>
                 <label for="content">Contenu de la news: </label><textarea rows="8" cols="50" name="content" id="content"></textarea><br/>

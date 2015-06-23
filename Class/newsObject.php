@@ -8,6 +8,15 @@ include "dbConnect.php";
          */
         private $_dbCo = null;
 
+
+
+        /*
+         * Id de la news
+         */
+
+        private $_id;
+
+
         /*
          * titre de la news
          */
@@ -62,13 +71,14 @@ include "dbConnect.php";
         /*
          * Fonction de modification de news
          */
-        function modifyNews($title, $author, $content){
+        function modifyNews($id, $title, $author, $content){
             //sécurisation des variables
+            $this->_id = addslashes(htmlentities($id));
             $this->_title = addslashes(htmlentities($title));
             $this->_author = addslashes(htmlentities($author));
             $this->_content = addslashes(htmlentities($content));
 
-            return $this->_dbCo->modifyDbNews();
+            return $this->_dbCo->modifyDbNews($id, $title, $author, $content);
         }
     }
 

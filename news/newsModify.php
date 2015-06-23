@@ -61,25 +61,66 @@
         <p>Alors n'attendez plus et inscrivez-vous !!!</p>
         <p><a class="btn btn-primary btn-lg" href="inscription.php" role="button">S'inscrire !</a></p>
         <?php
-            if(isset($_GET['id'])){
-                $id = intval(htmlentities($_GET['id']));
-                include "../class/dbConnect.php";
-                $newsSelect = new dbConnect();
-                if($newsSelect->getDbNewsId($id) == true) {
-                    foreach($newsSelect->getDbNewsId(id, author, title, content) as $newsData) {
-                        ?>
-                        <form method="post" action="form_news.php">
-                            <label for="title">Titre de la news: </label><input type="text" name="title" id="title" value="<?php echo $newsData['title']; ?>"><br/>
-                            <label for="author">Auteur de la news: </label><input type="text" name="author" id="author" value="<?php echo $newsData['author']; ?>"><br/>
-                            <label for="content">Contenu de la news: </label><textarea rows="8" cols="50" name="content" id="content"><?php echo $newsData['content']; ?></textarea><br/>
-                            <br/>
-                            <input type="submit" value="Créer la news >>"/>
-                        </form>
-                    <?php
-                    }
-                }
 
+        if(isset($_GET['action'])){ //on vérifie que l'on à bien reçu une action
+            $action = addslashes(htmlentities($_GET['action'])); //on sécurise l'action en l'insérant dans une variable
+
+            switch($action){       //on fait un switch des actions
+                case "modifyNews":  //récupération de la news et affichage dans un formulaire
+                    if(isset($_GET['id'])){
+                        $id = intval(htmlentities($_GET['id']));
+                        include "../class/dbConnect.php";
+                        $newsSelect = new dbConnect();
+                        $news = $newsSelect->getDbNewsId($id) ;
+                        if($news) {
+                            ?>
+                            <form method="post" action="newsModify.php?action=modifyDbNews">
+                                <label for="title">Titre de la news: </label><input type="text" name="title" id="title" value="<?php echo $news['title']; ?>"><br/>
+                                <label for="author">Auteur de la news: </label><input type="text" name="author" id="author" value="<?php echo $news['author']; ?>"><br/>
+                                <input type="hidden" name="id" value="<?php echo $news['id']; ?>"><br/>
+                                <label for="content">Contenu de la news: </label><textarea rows="8" cols="50" name="content" id="content"><?php echo $news['content']; ?></textarea><br/>
+                                <br/>
+                                <input type="submit" value="Modifier la news >>"/>
+                            </form>
+                        <?php
+                        }
+
+                        else{
+                            echo '<div class="alert alert-danger" role="alert">La news n\'existe pas !!</div>';
+                            header('Refresh:5, newsPage.php');
+                        }
+                    }
+
+                    else{
+                        echo '<div class="alert alert-danger" role="alert">Erreur Falate</div>';
+                        header('Refresh: 5, newsPage.php');
+                    }
+
+                    break;//récupération de la news et affichage dans un formulaire
+
+
+
+                case "modifyDbNews": //modification de la news en base de données
+                    if(isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['id']) AND isset($_POST['content'])){
+                        include "../class/newsObject.php";
+                        $newsModify = new news();
+                        if($newsModify->modifyNews($_POST['id'], $_POST['title'], $_POST['author'], $_POST['content']) == true){
+                            echo '<div class="alert alert-success" role="alert">La news à bien été modifiée !!</div>';
+                            header('Refresh:5, newsPage.php');
+                        }
+
+                        else{
+                            echo '<div class="alert alert-danger" role="alert">La news n\'a pas pu être modifée !!</div>';
+                        }
+                    }
+
+                    else{
+                        echo '<div class="alert alert-danger" role="alert">Erreur Fatale</div>';
+                    }
+                    break; // fin de la modification de la news en base de données
             }
+        }
+
         ?>
 
     </div>
