@@ -194,10 +194,6 @@ case 'home':
                 <label for="Message" id="message">Message<span class="required">*</span></label>
                 <textarea name="message" id="message" required></textarea>
 
-                <label for="Captcha" id="captcha">Name the small house pet that says "<i>meow</i>"<span
-                        class="required">*</span></label>
-                <input type="text" name="captcha" value="" required/>
-
                 <input id="submit" type="submit" name="submit" value="Send"/>
             </fieldset>
         </form>
