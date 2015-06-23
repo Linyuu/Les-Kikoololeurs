@@ -1,3 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+            <title>Contact</title>
+            <meta charset="utf-8" />
+            <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css" />
+            <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
+            <link rel="stylesheet" type="text/css" media="all" href="css/carousel.css" />
+            <link rel="icon" type="image/png" href="images/favicon.png" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+<body>
 <?php
 Function contact (){
 
@@ -57,3 +71,5 @@ Function contact (){
 
 }
 ?>
+</body>
+</html>
