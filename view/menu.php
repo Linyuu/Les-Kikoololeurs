@@ -19,6 +19,7 @@
                 <li><a href="../index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil <span class="sr-only">(current)</span></a></li>
                 <li><a href="inscription.php"><span class="glyphicon glyphicon-file"></span> S'inscrire</a></li>
                 <li><a href="http://localhost/kikoo/login/ConnectMember.php"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
+                <li><a href="http://localhost/kikoo/index.php?action=contact"><span class="glyphicon glyphicon-magnet"></span> Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Link</a></li>

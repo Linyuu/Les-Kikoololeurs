@@ -2,6 +2,8 @@
     class User
 	{
 		//Propriétés (variables)
+        private $_dbCo = null;
+
 		private $nom;
 		
 		private $prenom;
@@ -19,8 +21,11 @@
 		//Constructeur
 		function __construct()
 		{
-            include "dbConnect.php";
-			$connexion = new dbConnect;
+            try{
+                $this->_dbCo = new dbConnect();
+            }catch(\Exception $e){
+                echo 'Erreur: ' . $e . '';
+            }
 
 
 		}

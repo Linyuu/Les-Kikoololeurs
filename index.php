@@ -132,6 +132,12 @@ case 'home':
     break;
     case 'contact':
         ?>
+    <div class="jumbotron">
+        <div class="container">
+            <br />
+            <br />
+            <h3 align="center">- Formulaire de contact -</h3>
+            <br />
         <form id="contact" name="contact" method="post">
             <fieldset>
                 <label for="name" id="name">Name<span class="required">*</span></label>
@@ -149,6 +155,7 @@ case 'home':
                 <input id="submit" type="submit" name="submit" value="Send"/>
             </fieldset>
         </form>
+        </div>
         </div>
         <?php
         if (isset($POST)) {
@@ -190,22 +197,15 @@ case 'home':
 
     <body>
     <?php
-<<<<<<< HEAD
+
     $member = new User();
     include "class/dbconnect.php";
     $infos = new dbConnect();
     $table = $infos->GetOneUser($login);
-=======
     $member = new User;
-    $nom = $member->'nom';
-    $prenom = $member->'prenom';
-    $age = $member->'age';
-    $adresse = $member->'adresse';
-    $email = $member->'email';
-    $login = $member->'login';
-    $pass = $member->'pass_md5';
-    ?>
->>>>>>> origin/master
+
+
+
 
     if ($infos == true) {
         ?>
