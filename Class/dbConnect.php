@@ -1,4 +1,5 @@
 <?php
+
 	class dbConnect
 	{
 		/*
@@ -30,7 +31,7 @@
         /*
          * Nom de la base de données
          */
-        private $_database = 'test';
+        private $_database = 'news_system';
 		
 		/*
 		 * Constructeur
@@ -128,14 +129,54 @@
 		}
 
 
-		
+		/*
+		 * Séléction des informations utilisateur
+		 */
 		function GetOneUser($login){
-			$result = $this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "'");
+        $login = addslashes(htmlentities($login));
+        $result = $this->_connect->query("SELECT * FROM `membre` WHERE login='" . $login . "'");
 
-            $info = $result->fetch();
-			return $info;
-		}
+        $info = $result->fetch();
+        return $info;
+        }
 
+
+
+        /*
+         * Vérification du login de l'utilisateur
+         */
+        function verifyLogin($login){
+            $login = addslashes(htmlentities($login));
+            $result = $this->_connect->query("SELECT id FROM `membre` WHERE login='" . $login . "'");
+
+            $info = $result->rowCount();
+            return $info;
+        }
+
+
+        /*
+         * Vérification du mot de passe utilisateur
+         */
+
+        function verifyPass($id){
+            $id = intval(htmlentities($id));
+            $request = $this->_connect->query('SELECT pass_md5 FROM membre WHERE id='.$id.'');
+            $resultPass = $request->fetch();
+
+            return $resultPass;
+        }
+
+
+        /*
+         * vérification de l'id utilisateur
+         */
+
+        function getUserId($id){
+            $id = intval(htmlentities($id));
+            $request = $this->_connect->query('SELECT * FROM membre WHERE id='.$id.'');
+            $result = $request->fetch();
+            return $result;
+        }
 
         /*
          * Create user in database membre
@@ -151,6 +192,54 @@
                 "email" => addslashes(htmlentities($email)),
                 "login" => addslashes(htmlentities($login)),
                 "pass_md5" => addslashes(htmlentities(md5($pass_md5)))
+            ));
+
+            return true;
+        }
+
+
+
+        /*
+         * Modification des informations utilisateur
+         */
+
+        function modifyDbUser($id, $nom, $prenom, $age, $adresse, $email){
+            $id = intval(htmlentities($id));
+            $request = $this->_connect->prepare('UPDATE membre SET nom=:nom, prenom=:prenom, age=:age, adresse=:adresse, email=:email WHERE id='.$id.'');
+            $request->execute(array(
+                "nom" => addslashes(htmlentities($nom)),
+                "prenom" => addslashes(htmlentities($prenom)),
+                "age" => addslashes(htmlentities($age)),
+                "adresse" => addslashes(htmlentities($adresse)),
+                "email" => addslashes(htmlentities($email))
+            ));
+
+            return true;
+        }
+
+
+
+        /*
+         * Modification du mot de passe utilisateur
+         */
+
+        function setNewUserPass($password){
+            $request = $this->_connect->prepare('UPDATE membre SET pass_md5=:password');
+            $request->execute(array(
+                "password" => $password
+            ));
+            return true;
+        }
+
+
+        /*
+         * Modification de l'image de profil
+         */
+
+        function setImageProfile($image){
+            $req = $this->_connect->prepare('UPDATE membre SET image_profile=:image');
+            $req->execute(array(
+                "image" => addslashes(htmlentities($image))
             ));
 
             return true;

@@ -98,11 +98,7 @@ include "dbConnect.php";
 		{
 			$this->pass_md5 = $pass_md5;
 		}
-		
-		function getpass_md5()
-		{
-			return $this->pass_md5;
-		}
+
 		
 		//Creation d'un utilisateur
 		//On passe en argument toutes les infos à inserer en base de données, infos issus des champs du formulaire d'inscription
@@ -142,7 +138,7 @@ include "dbConnect.php";
 		
 		//Affichage d'un seul utilisateur
 		
-		function afficheUser()
+		function afficheUser($login)
 		{
 			$connexion = new dbConnect;
 			$membre = $connexion->GetOneUser($this->login);
